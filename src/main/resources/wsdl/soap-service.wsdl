@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:tns="http://rahma.com"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             targetNamespace="http://rahma.com"
+             name="SoapService">
+
+    <!-- Types -->
+    <types>
+        <schema targetNamespace="http://rahma.com"
+                xmlns="http://www.w3.org/2001/XMLSchema">
+
+            <element name="processSoapRequest">
+                <complexType>
+                    <sequence>
+                        <element name="labelle" type="xsd:string"/>
+                        <element name="accidents" type="xsd:int"/>
+                        <element name="tues" type="xsd:int"/>
+                        <element name="blesses" type="xsd:int"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+            <element name="processSoapRequestResponse">
+                <complexType>
+                    <sequence>
+                        <element name="result" type="xsd:string"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+            <element name="getAllSoapRequests">
+                <complexType/>
+            </element>
+
+            <element name="getAllSoapRequestsResponse">
+                <complexType>
+                    <sequence>
+                        <element name="soapRequest" type="tns:SoapRequest" maxOccurs="unbounded"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+            <complexType name="SoapRequest">
+                <sequence>
+                    <element name="id" type="xsd:long"/>
+                    <element name="labelle" type="xsd:string"/>
+                    <element name="accidents" type="xsd:int"/>
+                    <element name="tues" type="xsd:int"/>
+                    <element name="blesses" type="xsd:int"/>
+                </sequence>
+            </complexType>
+
+        </schema>
+    </types>
+
+    <!-- Messages -->
+    <message name="processSoapRequest">
+        <part name="parameters" element="tns:processSoapRequest"/>
+    </message>
+
+    <message name="processSoapRequestResponse">
+        <part name="parameters" element="tns:processSoapRequestResponse"/>
+    </message>
+
+    <message name="getAllSoapRequests">
+        <part name="parameters" element="tns:getAllSoapRequests"/>
+    </message>
+
+    <message name="getAllSoapRequestsResponse">
+        <part name="parameters" element="tns:getAllSoapRequestsResponse"/>
+    </message>
+
+    <!-- Port Type -->
+    <portType name="SoapServicePortType">
+        <operation name="processSoapRequest">
+            <input message="tns:processSoapRequest"/>
+            <output message="tns:processSoapRequestResponse"/>
+        </operation>
+        <operation name="getAllSoapRequests">
+            <input message="tns:getAllSoapRequests"/>
+            <output message="tns:getAllSoapRequestsResponse"/>
+        </operation>
+    </portType>
+
+    <!-- Binding -->
+    <binding name="SoapServiceSoapBinding" type="tns:SoapServicePortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+        <operation name="processSoapRequest">
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+
+        <operation name="getAllSoapRequests">
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+
+    </binding>
+
+    <!-- Service -->
+    <service name="SoapService">
+        <port name="SoapServicePort" binding="tns:SoapServiceSoapBinding">
+            <soap:address location="http://localhost:8082/soapService"/>
+        </port>
+    </service>
+
+</definitions>
