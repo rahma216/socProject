@@ -55,7 +55,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "scrap")
+@Table(name = "withRest")
 
 public class scrap {
     @Id

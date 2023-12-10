@@ -15,7 +15,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "new")
+@Table(name = "WithSoap")
 public class SoapRequest {
 
     @Id

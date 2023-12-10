@@ -12,6 +12,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+import tn.enicarthage.services.XmlParserService;
+
 import java.io.File;
 
 @SpringBootApplication
@@ -19,6 +21,9 @@ public class ProjetWebBackendApplication implements CommandLineRunner {
 
 	@Autowired
 	private SoapService soapService;
+
+	@Autowired
+	private XmlParserService xmlParserService;
 
 	public static void main(String[] args) {
 		System.setProperty("server.port", "8082");
@@ -31,6 +36,7 @@ public class ProjetWebBackendApplication implements CommandLineRunner {
 		// Specify the path to the XML file
 		String xmlFilePath = "C:/Users/Acer/Downloads/cause2022.xml";
 
+		xmlParserService.parseXmlAndSaveToDatabase(xmlFilePath);
 		// Read data from the XML file and send it as a SOAP request
 		processXmlData(xmlFilePath);
 	}
